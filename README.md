@@ -10,7 +10,9 @@ It has been observed that some 16,1 Macs use different firmware. So it is advise
 
 `ioreg -l | grep RequestedFiles`
 
-If the Firmware and Regulatory values match the ones given in the examples given below, check out the NVRAM values too as in instructions given below. Else the firmware files for your model are not in this repo.
+If the Firmware values are `bali-ID.trx`, `bali-X0.trx`, `bali-X2.trx`, `bali-X3.trx` or `bali.trx` check out the Regulatory values too as in instructions given below. Else the firmware files for your model are not in this repo.
+
+If the Regulatory values are `bali-ID.clmb`, `bali-X0.clmb`, `bali-X2.clmb` or `bali-X3.clmb` check out the NVRAM values too as in instructions given below. Else the firmware files for your model are not in this repo.
 
 If the NVRAM value in the output shows `P-bali-ID_M-HRPN_V-m__m-7.9.txt`, `P-bali-X0_M-HRPN_V-m__m-7.9.txt`, `P-bali-X2_M-HRPN_V-m__m-7.9.txt` or `P-bali-X3_M-HRPN_V-m__m-7.9.txt` then the 3 firmware files in 7.9 folder can be used on Linux. This is an example of the output shared by a discord user :-
 
@@ -36,7 +38,7 @@ If there is a different NVRAM value that the ones given above, firmware files fo
 
 ## Installation
 
-If you have got the correct firmware files, copy the three firmware files to `/lib/firmware/brcm/`.
+If you have got the correct firmware files, open linux and copy the three firmware files to `/lib/firmware/brcm/`.
 
 Open terminal and run `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
 
