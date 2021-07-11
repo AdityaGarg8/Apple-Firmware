@@ -10,7 +10,7 @@ It has been observed that some 16,1 Macs use different firmware. So it is advise
 
 `ioreg -l | grep RequestedFiles`
 
-If the Firmware values are `bali-ID.trx`, `bali-X0.trx`, `bali-X2.trx`, `bali-X3.trx` or `bali.trx` check out the Regulatory values too as in instructions given below. Else the firmware files for your model are not in this repo.
+If the Firmware values are `bali-ID.trx`, `bali-X0.trx`, `bali-X2.trx`, `bali-X3.trx`, `bali.trx`, `borneo-ID.trx`, `borneo-X0.trx`, `borneo-X2.trx` or `borneo-X3.trx` check out the Regulatory values too as in instructions given below. Else the firmware files for your model are not in this repo.
 
 If the Regulatory values are `bali-ID.clmb`, `bali-X0.clmb`, `bali-X2.clmb` or `bali-X3.clmb` check out the NVRAM values too as in instructions given below. Else the firmware files for your model are not in this repo.
 
