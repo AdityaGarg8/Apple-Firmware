@@ -10,11 +10,11 @@ It has been observed that some 16,1 Macs use different firmware. So it is advise
 
 `ioreg -l | grep RequestedFiles`
 
-If the Firmware values are `bali-ID.trx`, `bali-X0.trx`, `bali-X2.trx`, `bali-X3.trx`, `bali.trx`, `borneo-ID.trx`, `borneo-X0.trx`, `borneo-X2.trx`, `borneo-X3.trx` or `borneo.trx` check out the Regulatory values too as in instructions given below. Else the firmware files for your model are not in this repo.
+If the `Firmware` values are `bali-ID.trx`, `bali-X0.trx`, `bali-X2.trx`, `bali-X3.trx`, `bali.trx`, `borneo-ID.trx`, `borneo-X0.trx`, `borneo-X2.trx`, `borneo-X3.trx` or `borneo.trx` check out the Regulatory values too as in instructions given below. Else the firmware files for your model are not in this repo.
 
-If the Regulatory values are `bali-ID.clmb`, `bali-X0.clmb`, `bali-X2.clmb`, `bali-X3.clmb` or `bali.clmb` check out the NVRAM values too as in instructions given below. Else the firmware files for your model are not in this repo.
+If the `Regulatory` values are `bali-ID.clmb`, `bali-X0.clmb`, `bali-X2.clmb`, `bali-X3.clmb` or `bali.clmb` check out the NVRAM values too as in instructions given below. Else the firmware files for your model are not in this repo.
 
-If the NVRAM value in the output shows `P-bali-ID_M-HRPN_V-m__m-7.9.txt`, `P-bali-X0_M-HRPN_V-m__m-7.9.txt`, `P-bali-X2_M-HRPN_V-m__m-7.9.txt`, `P-bali-X3_M-HRPN_V-m__m-7.9.txt` or `P-bali_M-HRPN_V-m__m-7.9.txt` then the 3 firmware files in 7.9 folder can be used on Linux. This is an example of the output shared by a discord user :-
+If the `NVRAM` value in the output shows `P-bali-ID_M-HRPN_V-m__m-7.9.txt`, `P-bali-X0_M-HRPN_V-m__m-7.9.txt`, `P-bali-X2_M-HRPN_V-m__m-7.9.txt`, `P-bali-X3_M-HRPN_V-m__m-7.9.txt` or `P-bali_M-HRPN_V-m__m-7.9.txt` then the 3 firmware files in 7.9 folder can be used on Linux. This is an example of the output shared by a discord user :-
 
 ```sh
     "RequestedFiles" = ({
