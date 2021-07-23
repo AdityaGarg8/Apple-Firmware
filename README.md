@@ -42,7 +42,7 @@ If you have got the correct firmware files, open linux and copy the three firmwa
 
 Open terminal and run `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
 
-It's recommended to install `iwd` package to get a stable WPA2 Wifi connection. For Ubuntu run `sudo apt install iwd` to install the package.
+It's recommended to install `iwd` package to get a stable WPA2 Wifi connection. For Ubuntu run `sudo apt install iwd` to install the package. For more details and configuration, visit the [t2linux wiki].
 
 Wifi should start working.
 
