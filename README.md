@@ -38,7 +38,7 @@ If there is a different **NVRAM** value that the ones given above, firmware file
 
 ## Installation
 
-If you have got the correct firmware files, open linux and copy the three firmware files to `/lib/firmware/brcm/`.
+If you have got the correct firmware files, open linux and copy the three firmware files to `/lib/firmware/brcm`.
 
 Open terminal and run `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
 
