@@ -1,0 +1,1 @@
+brcmfmac4364b2-pcie.apple,kauai-HRPN-m-7.5.txt
