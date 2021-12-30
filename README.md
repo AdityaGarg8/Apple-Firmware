@@ -2,4 +2,4 @@
 
 The firmware has been extracted from **macOS Montery**.
 
-For more details refer to this [t2linux wiki].
+For more details refer to this [t2linux wiki](https://wiki.t2linux.org/guides/wifi/).
