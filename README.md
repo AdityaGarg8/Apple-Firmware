@@ -1,4 +1,4 @@
-# Wi-Fi firmware to get wifi running on Linux on MacBook Pro 16,1 (16 inch, 2019).
+# Wifi firmware to get wifi running on Linux on MacBook Pro 16,1 (16 inch, 2019).
 
 The firmware has been extracted from **macOS Big Sur**.
 
@@ -42,8 +42,8 @@ If you have got the correct firmware files, open linux and copy the three firmwa
 
 Open terminal and run `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
 
-In case you are experiencing unstable WPA2 Wi-Fi connection, follow [this guide](https://wiki.t2linux.org/guides/wifi/#fixing-unstable-wpa2-using-iwd).
+In case you are experiencing unstable WPA2 Wifi connection, follow [this guide](https://wiki.t2linux.org/guides/wifi/#fixing-unstable-wpa2-using-iwd).
 
-Wi-Fi should start working.
+Wifi should start working.
 
 [t2linux wiki]: https://wiki.t2linux.org/guides/wifi/
