@@ -1,1 +1,0 @@
-brcmfmac4377b3-pcie.apple,fiji-SPPR-m.txt
