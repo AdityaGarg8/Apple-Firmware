@@ -87,7 +87,7 @@ jobs:
           gh release download debian -D debian -R AdityaGarg8/Apple-Firmware && \
           cp /repo/deb.deb /repo/debian'
 
-          cd {{ github.workspace }}/debian
+          cd ${{ github.workspace }}/debian
           dpkg-name deb.deb
           if [[ $(ls | grep deb.deb) == deb.deb ]]
           then
