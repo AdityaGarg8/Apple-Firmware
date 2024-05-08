@@ -1,6 +1,6 @@
 # Wi-Fi and Bluetooth firmware for Linux on T2 and Apple Silicon Macs.
 
-The firmware has been extracted from **macOS GitHub Runner Image**.
+The firmware has been extracted from **[macOS GitHub Runner Image](https://github.com/actions/runner-images)**.
 
 ## Ubuntu/Debian
 
