@@ -85,19 +85,21 @@ jobs:
           && apt install gh -y && \
           cd /repo && \
           gh release download debian -D debian -R AdityaGarg8/Apple-Firmware && \
-          cp /repo/deb.deb /repo/debian'
+          cp /repo/deb.deb /repo/debian && \
+          cd /repo/debian && \
+          dpkg-name deb.deb && \
+          dpkg-scanpackages --multiversion . > Packages && \
+          gzip -k -f Packages && \
+          apt-ftparchive release . > Release && \
+          gpg --default-key "${GPG_SIGNING_EMAIL}" -abs -o - Release > Release.gpg && \
+          gpg --default-key "${GPG_SIGNING_EMAIL}" --clearsign -o - Release > InRelease'
 
           cd ${{ github.workspace }}/debian
-          dpkg-name deb.deb
           if [[ $(ls | grep deb.deb) == deb.deb ]]
           then
           echo "publish=no" >> $GITHUB_ENV
           fi
-          dpkg-scanpackages --multiversion . > Packages
-          gzip -k -f Packages
-          apt-ftparchive release . > Release
-          gpg --default-key "${GPG_SIGNING_EMAIL}" -abs -o - Release > Release.gpg
-          gpg --default-key "${GPG_SIGNING_EMAIL}" --clearsign -o - Release > InRelease
+
 
       - name: Release
         if: env.publish != 'no'
