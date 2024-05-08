@@ -63,6 +63,7 @@ jobs:
           echo "modprobe brcmfmac || true" >> postinst
           echo "modprobe -r hci_bcm4377 || true" >> postinst
           echo "modprobe hci_bcm4377 || true" >> postinst
+          sudo chmod a+x ./postinst
           cd ${{ github.workspace }}
           cp -r ${{ github.workspace }}/brcm ${{ github.workspace }}/deb/usr/lib/firmware
           dpkg-deb --build --root-owner-group -Zgzip deb
