@@ -1,0 +1,109 @@
+name: Release Debian Package
+on:
+  schedule:
+    - cron: '30 18 * * *'
+  workflow_dispatch:
+jobs:
+  macOS:
+    runs-on: macos-latest
+    steps:
+
+      - name: Rename and tar firmware
+        run: |
+          wget https://wiki.t2linux.org/tools/firmware.sh
+          python3 firmware.sh /usr/share/firmware ${{ github.workspace }}/firmware.tar
+          ver=$(sw_vers -productVersion)
+          echo "Package: apple-firmware" > control
+          echo "Version: ${ver}" >> control
+          echo "Maintainer: Aditya Garg" >> control
+          echo "Architecture: amd64" >> control
+          echo "Description: Wi-Fi and Bluetooth firmware for T2 Macs" >> control
+          mkdir firmware
+          mv ./firmware.tar ./firmware
+          mv ./control ./firmware
+
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: ${{ github.workspace }}/firmware
+  Linux:
+    needs: [macOS]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download firmware
+        uses: actions/download-artifact@v4
+        with:
+          name: firmware
+      - name: Configure GPG Key
+        run: |
+          echo -n "$GPG_SIGNING_KEY" | base64 -di | gpg --import
+          echo -n "$GPG_SIGNING_KEY" | base64 -di > key
+        env:
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+      - name: Create deb
+        run: |
+          tar -xf ${{ github.workspace }}/firmware.tar
+          cd ${{ github.workspace }}
+          mkdir deb
+          cd deb
+          mkdir DEBIAN
+          mkdir usr
+          cd usr
+          mkdir lib
+          cd lib
+          mkdir firmware
+          cd ..
+          cd ..
+          cd DEBIAN
+          cp ${{ github.workspace }}/control ./control
+          sudo chmod a+x ./control
+          echo "modprobe -r brcmfmac_wcc || true" > postinst
+          echo "modprobe -r brcmfmac || true" >> postinst
+          echo "modprobe brcmfmac || true" >> postinst
+          echo "modprobe -r hci_bcm4377 || true" >> postinst
+          echo "modprobe hci_bcm4377 || true" >> postinst
+          cd ${{ github.workspace }}
+          cp -r ${{ github.workspace }}/brcm ${{ github.workspace }}/deb/usr/lib/firmware
+          dpkg-deb --build --root-owner-group -Zgzip deb
+
+          DOCKER_IMAGE=ubuntu:22.04
+          docker pull ${DOCKER_IMAGE}
+          docker run \
+          -e GH_TOKEN=${{ secrets.GITHUB_TOKEN }} \
+          -e GPG_SIGNING_EMAIL=${{ secrets.GPG_SIGNING_EMAIL }} \
+          -t \
+          -v "$(pwd)":/repo \
+          ${DOCKER_IMAGE} \
+          /bin/bash -c 'apt-get update && \
+          apt-get install -y wget curl apt-utils dpkg-dev && \
+          mkdir -p -m 755 /etc/apt/keyrings && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+          && chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+          && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+          && apt update \
+          && apt install gh -y && \
+          cd /repo && \
+          gh release download debian -D debian -R AdityaGarg8/Apple-Firmware && \
+          cp /repo/deb.deb /repo/debian'
+
+          cd {{ github.workspace }}/debian
+          dpkg-name deb.deb
+          if [[ $(ls | grep deb.deb) == deb.deb ]]
+          then
+          echo "publish=no" >> $GITHUB_ENV
+          fi
+          dpkg-scanpackages --multiversion . > Packages
+          gzip -k -f Packages
+          apt-ftparchive release . > Release
+          gpg --default-key "${GPG_SIGNING_EMAIL}" -abs -o - Release > Release.gpg
+          gpg --default-key "${GPG_SIGNING_EMAIL}" --clearsign -o - Release > InRelease
+
+      - name: Release
+        if: env.publish != 'no'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ github.workspace }}/debian/*
+          tag_name: debian
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
