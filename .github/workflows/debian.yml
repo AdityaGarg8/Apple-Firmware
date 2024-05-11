@@ -43,6 +43,8 @@ jobs:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       - name: Create deb
         run: |
+          mkdir brcm
+          cd brcm
           tar -xf ${{ github.workspace }}/firmware.tar
           cd ${{ github.workspace }}
           mkdir deb
