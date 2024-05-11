@@ -11,7 +11,7 @@ jobs:
       - name: Rename and tar firmware
         run: |
           wget https://wiki.t2linux.org/tools/firmware.sh
-          python3 -v firmware.sh /usr/share/firmware ${{ github.workspace }}/firmware.tar
+          python3 firmware.sh /usr/share/firmware ${{ github.workspace }}/firmware.tar
           ver=$(sw_vers -productVersion)
           echo "Package: apple-firmware" > control
           echo "Version: ${ver}" >> control
