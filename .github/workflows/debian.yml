@@ -10,7 +10,7 @@ jobs:
 
       - name: Rename and tar firmware
         run: |
-          wget https://wiki.t2linux.org/tools/firmware.sh
+          wget https://github.com/t2linux/wiki/blob/9314a44971df3d6aff9af96b023181fb3e40ad2b/docs/tools/firmware.sh
           python3 firmware.sh /usr/share/firmware ${{ github.workspace }}/firmware.tar
           ver=$(sw_vers -productVersion)
           echo "Package: apple-firmware" > control
@@ -43,8 +43,6 @@ jobs:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       - name: Create deb
         run: |
-          mkdir brcm
-          cd brcm
           tar -xf ${{ github.workspace }}/firmware.tar
           cd ${{ github.workspace }}
           mkdir deb
