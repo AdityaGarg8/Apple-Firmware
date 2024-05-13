@@ -43,7 +43,7 @@ jobs:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       - name: Create deb
         run: |
-          tar -xf ${{ github.workspace }}/firmware.tar
+          tar -xvf ${{ github.workspace }}/firmware.tar
           cd ${{ github.workspace }}
           mkdir deb
           cd deb
