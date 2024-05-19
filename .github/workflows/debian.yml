@@ -14,7 +14,7 @@ jobs:
           python3 firmware.sh /usr/share/firmware ${{ github.workspace }}/firmware.tar -v
           ver=$(sw_vers -productVersion)
           echo "Package: apple-firmware" > control
-          echo "Version: ${ver}" >> control
+          echo "Version: ${ver}-1" >> control
           echo "Maintainer: Aditya Garg" >> control
           echo "Architecture: all" >> control
           echo "Description: Wi-Fi and Bluetooth firmware for T2 Macs" >> control
