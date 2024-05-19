@@ -16,7 +16,7 @@ jobs:
           echo "Package: apple-firmware" > control
           echo "Version: ${ver}" >> control
           echo "Maintainer: Aditya Garg" >> control
-          echo "Architecture: amd64" >> control
+          echo "Architecture: all" >> control
           echo "Description: Wi-Fi and Bluetooth firmware for T2 Macs" >> control
           mkdir firmware
           mv ./firmware.tar ./firmware
