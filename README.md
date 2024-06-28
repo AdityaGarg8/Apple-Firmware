@@ -2,8 +2,6 @@
 
 The firmware has been extracted from **[macOS GitHub Runner Image](https://github.com/actions/runner-images)**.
 
-**macOS version**: 14.4.1
-
 ## Ubuntu/Debian
 
 Ubuntu and Debian users can add the apt repo for firmware by running:
